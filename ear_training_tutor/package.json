@@ -2,7 +2,7 @@
   "name": "ear_training_tutor",
   "productName": "ear_training_tutor",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "AI powered ear training tutor",
   "main": "src/index.js",
   "scripts": {
     "ng": "ng",
