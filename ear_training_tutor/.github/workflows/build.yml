@@ -23,6 +23,9 @@ jobs:
         node-version: 16
 
     - name: Install dependencies
+      run: cd ../../../
+      run: npm install
+      run: cd ear_training_tutor
       run: npm install
         
     - name: Build Angular app
