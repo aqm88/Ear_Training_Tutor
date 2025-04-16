@@ -47,7 +47,7 @@ jobs:
     name: Release
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref_type == 'tag'
+    if: github.event_name == 'workflow_dispatch' || github.ref_type == 'tag'
 
     steps:
       - name: Download all artifacts
