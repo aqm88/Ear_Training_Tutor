@@ -5,6 +5,7 @@ const path = require('path');
 module.exports = {
   packagerConfig: {
     asar: true,
+    osxUniversal: true,
     icon: path.resolve(__dirname, 'src/assets/icons/icon'), // no file extension required, packager will use the right format
   },
   rebuildConfig: {},
