@@ -64,6 +64,6 @@ jobs:
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/**/out/make/**/*.{exe,dmg,AppImage,zip,deb,rpm}
+          files: dist/**/*.{exe,dmg,AppImage,zip,deb,rpm,nupkg}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
