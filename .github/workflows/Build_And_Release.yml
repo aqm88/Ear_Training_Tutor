@@ -1,0 +1,48 @@
+name: Build and Release Electron App
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on tags like v1.0.0
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+    name: Build for ${{ matrix.os }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install && cd ear_training_tutor && npm install
+
+    - name: Build Angular app
+      run: cd ear_training_tutor && npm run build
+
+    - name: Package Electron app
+      run: cd ear_training_tutor && npm run package
+
+    - name: Make Electron app
+      run: cd ear_training_tutor && npm run make
+
+    - name: Upload release artifacts
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/v')
+      with:
+        files: |
+          out/make/**/*.exe
+          out/make/**/*.dmg
+          out/make/**/*.AppImage
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
