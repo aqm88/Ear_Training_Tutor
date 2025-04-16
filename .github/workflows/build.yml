@@ -28,14 +28,8 @@ jobs:
     - name: Build Angular app
       run: cd ear_training_tutor && npm run build
 
-    - name: Build Electron app
-      uses: samuelmeuli/action-electron-builder@v1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        # Optional Mac signing
-        # mac_certs: ${{ secrets.MAC_CERTS }}
-        # mac_certs_password: ${{ secrets.MAC_CERTS_PASSWORD }}
-        # Optional Windows signing
-        # windows_certs: ${{ secrets.WINDOWS_CERTS }}
-        # windows_certs_password: ${{ secrets.WINDOWS_CERTS_PASSWORD }} 
+    - name: Package Electron app
+      run: npm run package
+
+    - name: Make distributables
+      run: npm run make
