@@ -46,20 +46,20 @@ jobs:
     name: Release
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.ref_type == 'tag'
 
     steps:
-    - name: Download all artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: dist
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
 
-    - name: List downloaded files (debug)
-      run: find dist
+      - name: List downloaded files (debug)
+        run: find dist
 
-    - name: Upload to GitHub Releases
-      uses: softprops/action-gh-release@v1
-      with:
-        files: dist/**/*.{exe,dmg,AppImage,zip,deb,rpm}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/**/*.{exe,dmg,AppImage,zip,deb,rpm}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
