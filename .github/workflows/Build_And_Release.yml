@@ -64,6 +64,9 @@ jobs:
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/**/**/**/**/*.zip && dist/**/**/**/*.rpm && dist/**/**/**/**/*.exe
+          files: |
+            dist/**/**/**/**/*.zip  
+            dist/**/**/**/*.rpm 
+            dist/**/**/**/**/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
